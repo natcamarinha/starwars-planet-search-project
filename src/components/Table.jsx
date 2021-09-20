@@ -2,7 +2,20 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Table() {
-  const { planets, filters: { filterByName: { name } } } = useContext(PlanetContext);
+  const {
+    planets,
+    filters: {
+      filterByName,
+      filterByNumericValues,
+    },
+  } = useContext(PlanetContext);
+
+  const { name } = filterByName;
+  const { column, comparison, value } = filterByNumericValues;
+
+  if (planets.length < 1) {
+    return <h4>Loading...</h4>;
+  }
 
   return (
     <table>
@@ -23,7 +36,20 @@ function Table() {
           <th>URL</th>
         </tr>
       </thead>
-      { planets.filter((planet) => planet.name.includes(name))
+      { planets
+        .filter((planet) => planet.name.toLowerCase().includes(name))
+        .filter((planet) => {
+          if (comparison === 'maior que') {
+            return Number(planet[column]) > Number(value);
+          }
+          if (comparison === 'menor que') {
+            return Number(planet[column]) < Number(value);
+          }
+          if (comparison === 'igual a') {
+            return Number(planet[column]) === Number(value);
+          }
+          return planets;
+        })
         .map((planet, index) => (
           <tbody key={ index }>
             <tr>
