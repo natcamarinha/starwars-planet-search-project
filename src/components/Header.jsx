@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Header() {
-  const { handleChange, handleNumericValues } = useContext(PlanetContext);
+  const { handleChange, handleNumericValues, handleSubmit } = useContext(PlanetContext);
 
   return (
     <form>
@@ -18,6 +18,7 @@ function Header() {
       <label htmlFor="column-filter">
         Filtrar por categoria:
         <select
+          name="column"
           data-testid="column-filter"
           id="column-filter"
           onChange={ handleNumericValues }
@@ -30,6 +31,7 @@ function Header() {
         </select>
       </label>
       <select
+        name="comparison"
         data-testid="comparison-filter"
         onChange={ handleNumericValues }
       >
@@ -38,13 +40,15 @@ function Header() {
         <option>igual a</option>
       </select>
       <input
+        name="value"
         type="number"
         data-testid="value-filter"
         onChange={ handleNumericValues }
       />
       <button
-        type="submit"
+        type="button"
         data-testid="button-filter"
+        onClick={ handleSubmit }
       >
         Filtrar
       </button>
