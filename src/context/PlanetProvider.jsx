@@ -17,6 +17,8 @@ function PlanetProvider({ children }) {
     filterByNumericValues: [],
   });
 
+  const [columnOptions, setColumnOptions] = useState(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+
   useEffect(() => {
     async function getPlanet() {
       const planet = await fetchPlanets();
@@ -39,17 +41,20 @@ function PlanetProvider({ children }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(changeFilters);
     const { filterByNumericValues } = changeFilters;
     setFilters({
       ...filters,
       filterByNumericValues: { ...filterByNumericValues, filterByNumericValues },
     });
+    const newArray = columnOptions
+      .filter((column) => column !== filterByNumericValues.column);
+    setColumnOptions(newArray);
   }
 
   const contextValue = {
     planets,
     filters,
+    columnOptions,
     handleChange,
     handleNumericValues,
     handleSubmit,

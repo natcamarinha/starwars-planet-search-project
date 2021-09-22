@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Header() {
-  const { handleChange, handleNumericValues, handleSubmit } = useContext(PlanetContext);
+  const { handleChange, handleNumericValues, handleSubmit, columnOptions } = useContext(PlanetContext);
+  console.log(columnOptions);
 
   return (
     <form>
@@ -23,11 +24,8 @@ function Header() {
           id="column-filter"
           onChange={ handleNumericValues }
         >
-          <option>population</option>
-          <option>orbital_period</option>
-          <option>diameter</option>
-          <option>rotation_period</option>
-          <option>surface_water</option>
+          { columnOptions.map((option, index) => (
+            <option key={ index } value={ option }>{ option }</option>))}
         </select>
       </label>
       <select
