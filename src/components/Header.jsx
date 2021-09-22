@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Header() {
-  const { handleChange, handleNumericValues, handleSubmit, columnOptions } = useContext(PlanetContext);
-  console.log(columnOptions);
+  const {
+    handleChange,
+    handleNumericValues,
+    handleSubmit,
+    columnOptions,
+  } = useContext(PlanetContext);
 
   return (
     <form>

@@ -17,7 +17,9 @@ function PlanetProvider({ children }) {
     filterByNumericValues: [],
   });
 
-  const [columnOptions, setColumnOptions] = useState(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [columnOptions, setColumnOptions] = useState(
+    ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
+  );
 
   useEffect(() => {
     async function getPlanet() {
